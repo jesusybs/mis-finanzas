@@ -22,17 +22,20 @@ def render_view(provider):
 
     # Plantillas Frecuentes
     st.write("**Plantillas de Registro Rapido**")
-    t1, t2, t3, t4, t5 = st.columns(5)
+    t1, t2, t3, t4, t5, t6 = st.columns(6)
     plantilla_data = None
-    if t1.button("Cafe (Bs. 10.00)"):
-        plantilla_data = {"Tipo": "Gasto", "Categoria": "Alimentacion", "Subcategoria": "Cafe y Snacks", "Descripcion": "Cafe", "Monto": 10.0, "Comercio": "Cafeteria"}
-    elif t2.button("Supermercado (Bs. 150.00)"):
-        plantilla_data = {"Tipo": "Gasto", "Categoria": "Alimentacion", "Subcategoria": "Supermercado", "Descripcion": "Despensa", "Monto": 150.0, "Comercio": "Supermercado"}
-    elif t3.button("Combustible (Bs. 100.00)"):
-        plantilla_data = {"Tipo": "Gasto", "Categoria": "Transporte", "Subcategoria": "Combustible", "Descripcion": "Combustible", "Monto": 100.0, "Comercio": "Estacion"}
-    elif t4.button("Taxi (Bs. 25.00)"):
-        plantilla_data = {"Tipo": "Gasto", "Categoria": "Transporte", "Subcategoria": "Transporte Publico / Taxi", "Descripcion": "Taxi", "Monto": 25.0, "Comercio": "Taxi"}
-    elif t5.button("Duplicar Ultimo"):
+    if t1.button("Comida"):
+        plantilla_data = {"Tipo": "Gasto", "Categoria": "Alimentacion", "Subcategoria": "Comida Diaria / Almuerzo", "Descripcion": "Comida / Almuerzo", "Monto": 15.0, "Comercio": "Pension / Restaurante"}
+    elif t2.button("Pasaje (Bs. 2.50)"):
+        plantilla_data = {"Tipo": "Gasto", "Categoria": "Transporte", "Subcategoria": "Pasajes (Micro / Trufi / Teleferico)", "Descripcion": "Pasajes del dia", "Monto": 2.50, "Comercio": "Transporte Publico"}
+    elif t3.button("Spotify"):
+        plantilla_data = {"Tipo": "Gasto", "Categoria": "Suscripciones Digitales", "Subcategoria": "Spotify", "Descripcion": "Suscripcion Spotify", "Monto": 45.0, "Comercio": "Spotify"}
+    elif t4.button("Google AI Pro"):
+        plantilla_data = {"Tipo": "Gasto", "Categoria": "Suscripciones Digitales", "Subcategoria": "Google AI Pro", "Descripcion": "Suscripcion Google AI Pro", "Monto": 140.0, "Comercio": "Google"}
+    elif t5.button("Ingreso IPCB"):
+        plantilla_data = {"Tipo": "Ingreso", "Categoria": "IPCB Import", "Subcategoria": "Ventas / Ingresos Mercaderia", "Descripcion": "Venta / Cobro IPCB Import", "Monto": 500.0, "Comercio": "Cliente IPCB"}
+    elif t6.button("Universidad"):
+        plantilla_data = {"Tipo": "Gasto", "Categoria": "Educacion", "Subcategoria": "Mensualidad Universidad", "Descripcion": "Cuota Universidad", "Monto": 0.0, "Comercio": "Universidad"}
         if not df_movs.empty:
             last = df_movs.iloc[-1].to_dict()
             plantilla_data = {
