@@ -11,8 +11,8 @@ storage:
     spreadsheet_name: "Mis Finanzas Personales"
 
 general:
-  currency_symbol: "$"
-  currency_code: "USD"
+  currency_symbol: "Bs."
+  currency_code: "BOB"
   decimal_separator: "."
   thousands_separator: ","
   month_start_day: 1

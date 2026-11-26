@@ -92,8 +92,8 @@ DEUDAS_DATA = [
 ]
 
 CONFIG_SHEET_DATA = [
-    ("moneda_simbolo", "$", "Simbolo principal para visualizacion"),
-    ("moneda_codigo", "USD", "Codigo ISO de la moneda"),
+    ("moneda_simbolo", "Bs.", "Simbolo principal para visualizacion"),
+    ("moneda_codigo", "BOB", "Codigo ISO de la moneda"),
     ("dia_inicio_mes", 1, "Dia calendario de inicio del mes financiero"),
     ("alerta_amarilla_pct", 80, "Porcentaje para alerta preventiva"),
     ("alerta_roja_pct", 100, "Porcentaje que indica presupuesto excedido"),

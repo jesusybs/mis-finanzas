@@ -24,14 +24,14 @@ def render_view(provider):
     st.write("**Plantillas de Registro Rapido**")
     t1, t2, t3, t4, t5 = st.columns(5)
     plantilla_data = None
-    if t1.button("Cafe ($5.00)"):
-        plantilla_data = {"Tipo": "Gasto", "Categoria": "Alimentacion", "Subcategoria": "Cafe y Snacks", "Descripcion": "Cafe", "Monto": 5.0, "Comercio": "Cafeteria"}
-    elif t2.button("Supermercado ($40.00)"):
-        plantilla_data = {"Tipo": "Gasto", "Categoria": "Alimentacion", "Subcategoria": "Supermercado", "Descripcion": "Despensa", "Monto": 40.0, "Comercio": "Supermercado"}
-    elif t3.button("Combustible ($30.00)"):
-        plantilla_data = {"Tipo": "Gasto", "Categoria": "Transporte", "Subcategoria": "Combustible", "Descripcion": "Combustible", "Monto": 30.0, "Comercio": "Estacion"}
-    elif t4.button("Taxi ($12.00)"):
-        plantilla_data = {"Tipo": "Gasto", "Categoria": "Transporte", "Subcategoria": "Transporte Publico / Taxi", "Descripcion": "Taxi", "Monto": 12.0, "Comercio": "Taxi"}
+    if t1.button("Cafe (Bs. 10.00)"):
+        plantilla_data = {"Tipo": "Gasto", "Categoria": "Alimentacion", "Subcategoria": "Cafe y Snacks", "Descripcion": "Cafe", "Monto": 10.0, "Comercio": "Cafeteria"}
+    elif t2.button("Supermercado (Bs. 150.00)"):
+        plantilla_data = {"Tipo": "Gasto", "Categoria": "Alimentacion", "Subcategoria": "Supermercado", "Descripcion": "Despensa", "Monto": 150.0, "Comercio": "Supermercado"}
+    elif t3.button("Combustible (Bs. 100.00)"):
+        plantilla_data = {"Tipo": "Gasto", "Categoria": "Transporte", "Subcategoria": "Combustible", "Descripcion": "Combustible", "Monto": 100.0, "Comercio": "Estacion"}
+    elif t4.button("Taxi (Bs. 25.00)"):
+        plantilla_data = {"Tipo": "Gasto", "Categoria": "Transporte", "Subcategoria": "Transporte Publico / Taxi", "Descripcion": "Taxi", "Monto": 25.0, "Comercio": "Taxi"}
     elif t5.button("Duplicar Ultimo"):
         if not df_movs.empty:
             last = df_movs.iloc[-1].to_dict()

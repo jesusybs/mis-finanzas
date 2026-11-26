@@ -98,7 +98,7 @@ def create_control_financiero(output_path: Path) -> None:
         ws_res[bot_l] = formula
         ws_res[bot_l].font = FONT_CARD_VAL
         ws_res[bot_l].alignment = Alignment(horizontal="center", vertical="center")
-        ws_res[bot_l].number_format = '$#,##0.00'
+        ws_res[bot_l].number_format = '"Bs. "#,##0.00'
         ws_res[bot_l].fill = CARD_FILL
 
     # Tabla Anual Mes a Mes (Fila 9)
@@ -133,7 +133,7 @@ def create_control_financiero(output_path: Path) -> None:
                 c.alignment = Alignment(horizontal="center")
             elif col_idx in [4, 5, 6]:
                 c.alignment = Alignment(horizontal="right")
-                c.number_format = '$#,##0.00'
+                c.number_format = '"Bs. "#,##0.00'
             elif col_idx == 7:
                 c.alignment = Alignment(horizontal="right")
                 c.number_format = '0.0%'
@@ -149,7 +149,7 @@ def create_control_financiero(output_path: Path) -> None:
     for c in [cell_tot_ing, cell_tot_gas, cell_tot_bal]:
         c.font = FONT_BOLD
         c.alignment = Alignment(horizontal="right")
-        c.number_format = '$#,##0.00'
+        c.number_format = '"Bs. "#,##0.00'
         c.border = BORDER_TOTAL
     cell_tot_pct.font = FONT_BOLD
     cell_tot_pct.alignment = Alignment(horizontal="right")
@@ -220,7 +220,7 @@ def create_control_financiero(output_path: Path) -> None:
                 c.alignment = Alignment(horizontal="left", vertical="center")
             elif col_idx in [3, 4, 5]:
                 c.alignment = Alignment(horizontal="right", vertical="center")
-                c.number_format = '$#,##0.00'
+                c.number_format = '"Bs. "#,##0.00'
             elif col_idx == 6:
                 c.alignment = Alignment(horizontal="right", vertical="center")
                 c.number_format = '0.0%'
@@ -239,7 +239,7 @@ def create_control_financiero(output_path: Path) -> None:
     for c in [c_tot_plan, c_tot_real, c_tot_dif]:
         c.font = FONT_BOLD
         c.alignment = Alignment(horizontal="right")
-        c.number_format = '$#,##0.00'
+        c.number_format = '"Bs. "#,##0.00'
         c.border = BORDER_TOTAL
     c_tot_pct.font = FONT_BOLD
     c_tot_pct.alignment = Alignment(horizontal="right")
@@ -294,7 +294,7 @@ def create_control_financiero(output_path: Path) -> None:
                 cell.alignment = Alignment(horizontal="left")
             elif col_idx == 6:
                 cell.alignment = Alignment(horizontal="right")
-                cell.number_format = '$#,##0.00'
+                cell.number_format = '"Bs. "#,##0.00'
 
     # Validacion desplegable de Tipo en Registro Diario (Columna C)
     dv_tipo = DataValidation(type="list", formula1='"Ingreso,Gasto"', allow_blank=True)
