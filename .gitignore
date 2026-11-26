@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Archivos de datos sensibles y hojas reales del usuario
+credentials.json
+token.json
+backups/
+~$*
+*.tmp
+
+# Streamlit
+.streamlit/secrets.toml

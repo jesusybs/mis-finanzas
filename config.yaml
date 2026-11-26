@@ -1,0 +1,23 @@
+app:
+  name: "Mi Control de Finanzas"
+  version: "1.0.0"
+  storage_mode: "excel"  # Opciones: "excel" o "google_sheets"
+
+storage:
+  excel:
+    filepath: "finanzas.xlsx"
+  google_sheets:
+    credentials_file: "credentials.json"
+    spreadsheet_name: "Mis Finanzas Personales"
+
+general:
+  currency_symbol: "$"
+  currency_code: "USD"
+  decimal_separator: "."
+  thousands_separator: ","
+  month_start_day: 1
+  alert_yellow_pct: 80.0
+  alert_red_pct: 100.0
+
+theme:
+  default_mode: "dark"
