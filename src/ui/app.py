@@ -34,15 +34,13 @@ def run_app():
     provider = get_data_provider()
 
     # Menu Lateral Sobrio
-    st.sidebar.markdown(
-        """
-        <div style="padding-bottom: 0.75rem; border-bottom: 1px solid #E5E7EB; margin-bottom: 1rem;">
-            <h3 style="margin: 0; color: #111827; font-size: 1.1rem; letter-spacing: -0.02em;">Control de Finanzas</h3>
-            <span style="font-size: 0.75rem; color: #6B7280;">Base de datos en Excel</span>
-        </div>
-        """,
-        unsafe_allow_html=True,
+    sidebar_header = (
+        '<div style="padding-bottom: 0.75rem; border-bottom: 1px solid #E5E7EB; margin-bottom: 1rem;">'
+        '<h3 style="margin: 0; color: #111827; font-size: 1.1rem; letter-spacing: -0.02em;">Control de Finanzas</h3>'
+        '<span style="font-size: 0.75rem; color: #6B7280;">Base de datos en Excel</span>'
+        '</div>'
     )
+    st.sidebar.markdown(sidebar_header, unsafe_allow_html=True)
 
     SECCIONES = {
         "Dashboard": v01_dashboard,

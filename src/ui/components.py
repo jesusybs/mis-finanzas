@@ -12,29 +12,26 @@ def render_kpi_grid(items: List[Tuple[str, str, str]]) -> None:
     automaticamente a 2 columnas en celulares y 4-5 en monitores.
     items: lista de tuplas (Etiqueta, Valor, Subtitulo/Detalle)
     """
-    cards_html = ""
+    cards = []
     for label, val, sub in items:
-        cards_html += f"""
-        <div class="kpi-card">
-            <div class="kpi-label">{label}</div>
-            <div class="kpi-number">{val}</div>
-            {f'<div class="kpi-caption">{sub}</div>' if sub else ''}
-        </div>
-        """
+        sub_html = f'<div class="kpi-caption">{sub}</div>' if sub else ''
+        cards.append(
+            f'<div class="kpi-card">'
+            f'<div class="kpi-label">{label}</div>'
+            f'<div class="kpi-number">{val}</div>'
+            f'{sub_html}'
+            f'</div>'
+        )
 
-    st.markdown(
-        f'<div class="kpi-grid-responsive">{cards_html}</div>',
-        unsafe_allow_html=True,
-    )
+    full_html = f'<div class="kpi-grid-responsive">{"".join(cards)}</div>'
+    st.markdown(full_html, unsafe_allow_html=True)
 
 
 def render_insight_card(titulo: str, mensaje: str) -> None:
-    st.markdown(
-        f"""
-        <div class="insight-item">
-            <div class="insight-item-title">{titulo}</div>
-            <div class="insight-item-desc">{mensaje}</div>
-        </div>
-        """,
-        unsafe_allow_html=True,
+    card_html = (
+        f'<div class="insight-item">'
+        f'<div class="insight-item-title">{titulo}</div>'
+        f'<div class="insight-item-desc">{mensaje}</div>'
+        f'</div>'
     )
+    st.markdown(card_html, unsafe_allow_html=True)

@@ -55,17 +55,15 @@ def render_view(provider):
     st.write("**Diagnostico de Flujo**")
     score_col, ins_col = st.columns([1, 2])
     with score_col:
-        st.markdown(
-            f"""
-            <div class="kpi-card" style="border-left: 4px solid #18181B; margin-bottom: 0.85rem;">
-                <div class="kpi-label">Puntaje Financiero</div>
-                <div class="kpi-number">{health['Score_Total']}<span style="font-size: 0.9rem; font-weight: 500; color: #71717A;"> / 100</span></div>
-                <div style="font-size: 0.85rem; font-weight: 600; color: #18181B; margin-top: 0.25rem;">Nivel: {health['Nivel']}</div>
-                <div class="kpi-caption">{health['Mensaje']}</div>
-            </div>
-            """,
-            unsafe_allow_html=True,
+        score_html = (
+            f'<div class="kpi-card" style="border-left: 4px solid #18181B; margin-bottom: 0.85rem;">'
+            f'<div class="kpi-label">Puntaje Financiero</div>'
+            f'<div class="kpi-number">{health["Score_Total"]}<span style="font-size: 0.9rem; font-weight: 500; color: #71717A;"> / 100</span></div>'
+            f'<div style="font-size: 0.85rem; font-weight: 600; color: #18181B; margin-top: 0.25rem;">Nivel: {health["Nivel"]}</div>'
+            f'<div class="kpi-caption">{health["Mensaje"]}</div>'
+            f'</div>'
         )
+        st.markdown(score_html, unsafe_allow_html=True)
     with ins_col:
         if insights:
             for ins in insights[:2]:
