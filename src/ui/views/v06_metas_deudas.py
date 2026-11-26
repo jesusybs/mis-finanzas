@@ -65,14 +65,42 @@ def render_view(provider):
     with tab_deudas:
         df_deudas = provider.get_sheet("Deudas")
 
+        st.write("**Registrar Nueva Deuda**")
+        with st.expander("Anadir Nueva Deuda", expanded=df_deudas.empty):
+            with st.form("form_nueva_deuda"):
+                d1, d2 = st.columns(2)
+                with d1:
+                    acreedor = st.text_input("Acreedor / Nombre de la Deuda", placeholder="Banco Union, Prestamo personal, Tarjeta, etc.")
+                    monto_orig = st.number_input("Monto Original (Bs.)", min_value=0.0, value=1000.0, step=100.0)
+                    saldo_act = st.number_input("Saldo Actual Pendiente (Bs.)", min_value=0.0, value=1000.0, step=100.0)
+                with d2:
+                    tasa_int = st.number_input("Tasa de Interes Anual (%)", min_value=0.0, value=12.0, step=0.5)
+                    cuota_min = st.number_input("Cuota Mensual Minima (Bs.)", min_value=0.0, value=100.0, step=20.0)
+                    vencimiento = st.date_input("Fecha Limite / Vencimiento")
+                btn_crear_deuda = st.form_submit_button("Guardar Deuda en el Sistema", type="primary")
+
+            if btn_crear_deuda and acreedor:
+                provider.append_row("Deudas", {
+                    "Acreedor": acreedor,
+                    "Monto original": monto_orig,
+                    "Saldo actual": saldo_act,
+                    "Tasa de interes (%)": tasa_int,
+                    "Cuota mensual": cuota_min,
+                    "Fecha vencimiento": str(vencimiento),
+                })
+                st.success(f"Deuda '{acreedor}' guardada correctamente.")
+                st.rerun()
+
         if df_deudas.empty or "Saldo actual" not in df_deudas.columns:
-            st.info("No hay deudas registradas en la hoja.")
+            st.info("No hay deudas registradas aun. Use el formulario de arriba para ingresar su primera deuda.")
             return
 
-        st.dataframe(df_deudas, use_container_width=True)
+        st.markdown("---")
+        st.write("**Deudas Activas Registradas**")
+        st.dataframe(df_deudas, use_container_width=True, hide_index=True)
 
         pago_extra = st.number_input(
-            "Pago extra mensual a destinar a cancelacion",
+            "Pago extra mensual a destinar a cancelacion (Bs.)",
             min_value=0.0,
             value=100.0,
             step=25.0
@@ -89,18 +117,18 @@ def render_view(provider):
             st.metric("Ahorro Intereses con Avalancha", format_currency(sim["Diferencia_Intereses"]))
 
         st.markdown("---")
-        st.write("**Comparativa de Metodos**")
+        st.write("**Comparativa de Estrategias de Cancelacion**")
         col_snow, col_av = st.columns(2)
 
         with col_snow:
             st.markdown(
                 f"""
-                <div class="kpi-container">
-                    <div class="kpi-title">Metodo Bola de Nieve</div>
-                    <p style="font-size: 0.8rem; color: #4B5563;">Ordena deudas de menor a mayor saldo actual.</p>
-                    <div class="kpi-val">{sim['Snowball']['Meses']} meses</div>
-                    <div style="font-size: 0.85rem; margin-top: 0.3rem;">Intereses totales: <b>{format_currency(sim['Snowball']['Intereses_Totales'])}</b></div>
-                    <div style="font-size: 0.75rem; color: #6B7280; margin-top: 0.3rem;">Orden: {', '.join(sim['Snowball']['Orden'])}</div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Metodo Bola de Nieve</div>
+                    <p style="font-size: 0.8rem; color: #52525B; margin: 0.25rem 0;">Prioriza pagar deudas de menor a mayor saldo actual.</p>
+                    <div class="kpi-number">{sim['Snowball']['Meses']} meses</div>
+                    <div style="font-size: 0.82rem; margin-top: 0.35rem; color: #18181B;">Intereses totales: <b>{format_currency(sim['Snowball']['Intereses_Totales'])}</b></div>
+                    <div style="font-size: 0.75rem; color: #71717A; margin-top: 0.25rem;">Orden: {', '.join(sim['Snowball']['Orden'])}</div>
                 </div>
                 """,
                 unsafe_allow_html=True,
@@ -109,12 +137,12 @@ def render_view(provider):
         with col_av:
             st.markdown(
                 f"""
-                <div class="kpi-container">
-                    <div class="kpi-title">Metodo Avalancha</div>
-                    <p style="font-size: 0.8rem; color: #4B5563;">Ordena deudas de mayor a menor tasa de interes anual.</p>
-                    <div class="kpi-val">{sim['Avalanche']['Meses']} meses</div>
-                    <div style="font-size: 0.85rem; margin-top: 0.3rem;">Intereses totales: <b>{format_currency(sim['Avalanche']['Intereses_Totales'])}</b></div>
-                    <div style="font-size: 0.75rem; color: #6B7280; margin-top: 0.3rem;">Orden: {', '.join(sim['Avalanche']['Orden'])}</div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Metodo Avalancha</div>
+                    <p style="font-size: 0.8rem; color: #52525B; margin: 0.25rem 0;">Prioriza pagar deudas con mayor tasa de interes anual.</p>
+                    <div class="kpi-number">{sim['Avalanche']['Meses']} meses</div>
+                    <div style="font-size: 0.82rem; margin-top: 0.35rem; color: #18181B;">Intereses totales: <b>{format_currency(sim['Avalanche']['Intereses_Totales'])}</b></div>
+                    <div style="font-size: 0.75rem; color: #71717A; margin-top: 0.25rem;">Orden: {', '.join(sim['Avalanche']['Orden'])}</div>
                 </div>
                 """,
                 unsafe_allow_html=True,
